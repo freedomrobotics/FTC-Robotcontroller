@@ -96,12 +96,68 @@ public class TeleOp extends OpMode
         double frontRightPower;
         double rearLeftPower;
         double rearRightPower;
+        double ejection;
+        double intake;
+        double lift;
+        double belt;
 
         frontLeftPower = gamepad1.left_stick_y + gamepad1.left_stick_x + gamepad1.right_stick_x;
         frontRightPower = gamepad1.left_stick_y - gamepad1.left_stick_x - gamepad1.right_stick_x;
         rearLeftPower = gamepad1.left_stick_y - gamepad1.left_stick_x + gamepad1.right_stick_x;
         rearRightPower = gamepad1.left_stick_y + gamepad1.left_stick_x - gamepad1.right_stick_x;
 
+        hardware.smallClawServo.setPosition(gamepad2.left_stick_y);
+        hardware.smallClawServo.setPosition(gamepad2.left_stick_y);
+        if(gamepad1.a)
+        {
+            hardware.flagServo.setPosition(90);
+        }
+        if(gamepad1.b)
+        {
+            hardware.flagServo.setPosition(0);
+        }
+        if(gamepad2.y)
+        {
+            hardware.smallClawArmServo.setPosition(90);
+        }
+        if(gamepad2.b)
+        {
+            hardware.smallClawArmServo.setPosition(0);
+        }
+        if(gamepad2.dpad_up)
+        {
+            hardware.largeClawArmServo.setPosition(90);
+        }
+        if(gamepad2.dpad_down)
+        {
+            hardware.largeClawArmServo.setPosition(0);
+        }
+        if(gamepad2.left_bumper)
+        {
+          hardware.beltMotor.setPower(1);
+        }
+        else
+        {
+            hardware.beltMotor.setPower(0);
+        }
+        if(gamepad2.right_bumper)
+        {
+            hardware.intakeMotor.setPower(1);
+        }
+        else
+        {
+            hardware.intakeMotor.setPower(0);
+        }
+        if(gamepad2.x)
+        {
+            hardware.ejectionMotor.setPower(1);
+        }
+        if(gamepad2.a)
+        {
+            hardware.ejectionMotor.setPower(0);
+        }
+        hardware.smallClawServo.setPosition(gamepad2.left_stick_y);
+        hardware.liftMotor.setPower(gamepad2.right_stick_y);
         hardware.frontLeft.setPower(frontLeftPower);
         hardware.frontRight.setPower(frontRightPower);
         hardware.rearLeft.setPower(rearLeftPower);
