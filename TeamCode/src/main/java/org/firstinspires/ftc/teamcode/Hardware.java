@@ -26,8 +26,6 @@ public class Hardware {
         rearLeft = hardwareMap.get(DcMotor.class, "rearLeft");
         rearRight = hardwareMap.get(DcMotor.class, "rearRight");
 
-        ejectionMotor = hardwareMap.get(DcMotor.class, "ejectionMotor");
-
     }
 
 }

@@ -55,14 +55,16 @@ import com.qualcomm.robotcore.util.Range;
 public class Autonomous extends OpMode
 {
 
-    /*
-     * Code to run ONCE when the driver hits INIT
-     */
+    Hardware hardware;
+
+    //set initial robot location here
+    float[] location = {-40, -50};
+
     @Override
     public void init() {
         telemetry.addData("Status", "Initialized");
 
-        Hardware hardware = new Hardware(hardwareMap);
+        hardware = new Hardware(hardwareMap);
 
     }
 
@@ -96,6 +98,12 @@ public class Autonomous extends OpMode
      */
     @Override
     public void stop() {
+    }
+
+    private void moveTo(){
+
+
+        
     }
 
 }
