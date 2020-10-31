@@ -50,7 +50,7 @@ import com.qualcomm.robotcore.util.Range;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="Basic: Iterative OpMode", group="Iterative Opmode")
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="Autonomous", group="Iterative Opmode")
 //@Disabled
 public class Autonomous extends OpMode
 {
@@ -103,7 +103,7 @@ public class Autonomous extends OpMode
     private void moveTo(){
 
 
-        
+
     }
 
 }
