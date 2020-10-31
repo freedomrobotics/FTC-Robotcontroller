@@ -96,18 +96,26 @@ public class TeleOp extends OpMode
         double frontRightPower;
         double rearLeftPower;
         double rearRightPower;
-        double ejection;
-        double intake;
-        double lift;
-        double belt;
 
         frontLeftPower = gamepad1.left_stick_y + gamepad1.left_stick_x + gamepad1.right_stick_x;
         frontRightPower = gamepad1.left_stick_y - gamepad1.left_stick_x - gamepad1.right_stick_x;
         rearLeftPower = gamepad1.left_stick_y - gamepad1.left_stick_x + gamepad1.right_stick_x;
         rearRightPower = gamepad1.left_stick_y + gamepad1.left_stick_x - gamepad1.right_stick_x;
 
-        hardware.smallClawServo.setPosition(gamepad2.left_stick_y);
-        hardware.smallClawServo.setPosition(gamepad2.left_stick_y);
+        double smallClawServo = 0;
+
+        if(gamepad2.left_stick_y > 0){
+
+            smallClawServo -= 2;
+
+        } else if(gamepad2.left_stick_y < 0){
+
+            smallClawServo += 2;
+
+        }
+
+        hardware.smallClawServo.setPosition(smallClawServo);
+
         if(gamepad1.a)
         {
             hardware.flagServo.setPosition(90);
