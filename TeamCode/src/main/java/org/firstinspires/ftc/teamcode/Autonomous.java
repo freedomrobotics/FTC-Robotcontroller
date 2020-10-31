@@ -31,9 +31,8 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -51,12 +50,10 @@ import com.qualcomm.robotcore.util.Range;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name="Basic: Iterative OpMode", group="Iterative Opmode")
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="Basic: Iterative OpMode", group="Iterative Opmode")
 //@Disabled
-public class TeleOp extends OpMode
+public class Autonomous extends OpMode
 {
-
-    Hardware hardware;
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -65,10 +62,8 @@ public class TeleOp extends OpMode
     public void init() {
         telemetry.addData("Status", "Initialized");
 
-        hardware = new Hardware(hardwareMap);
+        Hardware hardware = new Hardware(hardwareMap);
 
-        // Tell the driver that initialization is complete.
-        telemetry.addData("Status", "Initialized");
     }
 
     /*
@@ -92,20 +87,7 @@ public class TeleOp extends OpMode
     @Override
     public void loop() {
 
-        double frontLeftPower;
-        double frontRightPower;
-        double rearLeftPower;
-        double rearRightPower;
 
-        frontLeftPower = gamepad1.left_stick_y + gamepad1.left_stick_x + gamepad1.right_stick_x;
-        frontRightPower = gamepad1.left_stick_y - gamepad1.left_stick_x - gamepad1.right_stick_x;
-        rearLeftPower = gamepad1.left_stick_y - gamepad1.left_stick_x + gamepad1.right_stick_x;
-        rearRightPower = gamepad1.left_stick_y + gamepad1.left_stick_x - gamepad1.right_stick_x;
-
-        hardware.frontLeft.setPower(frontLeftPower);
-        hardware.frontRight.setPower(frontRightPower);
-        hardware.rearLeft.setPower(rearLeftPower);
-        hardware.rearRight.setPower(rearRightPower);
 
     }
 
