@@ -26,13 +26,14 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
+// this is the packagage created by first inspires
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -59,6 +60,11 @@ public class TeleOp extends OpMode
     private DcMotor frontRight;
     private DcMotor rearLeft;
     private DcMotor rearRight;
+    private Servo flag;
+    private Servo miniClaw;
+    private Servo miniClawArm;
+    private Servo largeClawArm;
+    private DcMotor largeClaw;
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -70,10 +76,6 @@ public class TeleOp extends OpMode
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
-        frontLeft = hardwareMap.get(DcMotor.class, "left_drive");
-        frontRight = hardwareMap.get(DcMotor.class, "left_drive");
-        rearLeft = hardwareMap.get(DcMotor.class, "left_drive");
-        rearRight = hardwareMap.get(DcMotor.class, "left_drive");
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
