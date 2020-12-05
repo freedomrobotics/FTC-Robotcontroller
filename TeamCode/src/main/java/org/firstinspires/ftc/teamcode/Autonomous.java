@@ -57,8 +57,13 @@ public class Autonomous extends OpMode
 
     Hardware hardware;
 
-    //set initial robot location here
-    float[] location = {-40, -50};
+    //set initial robot location here in inches(center of field is origin)
+    float[] robotLocation = {-40, -50};
+
+    float[] frontLeftLocation;
+    float[] frontRightLocation;
+    float[] rearLeftLocation;
+    float[] rearRightLocation;
 
     @Override
     public void init() {
@@ -100,9 +105,104 @@ public class Autonomous extends OpMode
     public void stop() {
     }
 
-    private void moveTo(){
+    private void moveTo(float[] targetLocation){
 
+        float xDirMovement = targetLocation[0] - robotLocation[0];
+        float yDirMovement = targetLocation[1] - robotLocation[1];
 
+        // Turn On RUN_TO_POSITION
+        hardware.frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.rearLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.rearRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        // move forward/backward
+        hardware.frontLeft.setTargetPosition((int) xDirMovement);
+        hardware.frontRight.setTargetPosition((int) xDirMovement);
+        hardware.rearLeft.setTargetPosition((int) xDirMovement);
+        hardware.rearRight.setTargetPosition((int) xDirMovement);
+
+        hardware.frontLeft.setPower(1);
+        hardware.frontRight.setPower(1);
+        hardware.rearLeft.setPower(1);
+        hardware.rearRight.setPower(1);
+
+        while (
+                (hardware.frontLeft.isBusy()
+                        && hardware.frontRight.isBusy()
+                        && hardware.rearLeft.isBusy()
+                        && hardware.rearRight.isBusy())) {
+
+            // Display it for the driver.
+            telemetry.addData("Path2",  "Running at %7d :%7d",
+                    hardware.frontLeft.getCurrentPosition(),
+                    hardware.frontRight.getCurrentPosition());
+            telemetry.update();
+        }
+
+        hardware.frontLeft.setPower(0);
+        hardware.frontRight.setPower(0);
+        hardware.rearLeft.setPower(0);
+        hardware.rearRight.setPower(0);
+
+        //rotate
+        hardware.frontLeft.setTargetPosition(12);
+        hardware.rearLeft.setTargetPosition(-12);
+
+        hardware.frontLeft.setPower(1);
+        hardware.frontRight.setPower(1);
+        hardware.rearLeft.setPower(1);
+        hardware.rearRight.setPower(1);
+
+        while (
+                (hardware.frontLeft.isBusy()
+                        && hardware.frontRight.isBusy()
+                        && hardware.rearLeft.isBusy()
+                        && hardware.rearRight.isBusy())) {
+
+            // Display it for the driver.
+            telemetry.addData("Path2",  "Running at %7d :%7d",
+                    hardware.frontLeft.getCurrentPosition(),
+                    hardware.frontRight.getCurrentPosition());
+            telemetry.update();
+        }
+
+        hardware.frontLeft.setPower(0);
+        hardware.frontRight.setPower(0);
+        hardware.rearLeft.setPower(0);
+        hardware.rearRight.setPower(0);
+
+        // move left/right
+        // move forward/backward
+        hardware.frontLeft.setTargetPosition((int) yDirMovement);
+        hardware.frontRight.setTargetPosition((int) yDirMovement);
+        hardware.rearLeft.setTargetPosition((int) yDirMovement);
+        hardware.rearRight.setTargetPosition((int) yDirMovement);
+
+        hardware.frontLeft.setPower(1);
+        hardware.frontRight.setPower(1);
+        hardware.rearLeft.setPower(1);
+        hardware.rearRight.setPower(1);
+
+        while (
+                (hardware.frontLeft.isBusy()
+                        && hardware.frontRight.isBusy()
+                        && hardware.rearLeft.isBusy()
+                        && hardware.rearRight.isBusy())) {
+
+            // Display it for the driver.
+            telemetry.addData("Path2",  "Running at %7d :%7d",
+                    hardware.frontLeft.getCurrentPosition(),
+                    hardware.frontRight.getCurrentPosition());
+            telemetry.update();
+        }
+
+        hardware.frontLeft.setPower(0);
+        hardware.frontRight.setPower(0);
+        hardware.rearLeft.setPower(0);
+        hardware.rearRight.setPower(0);
+
+        robotLocation = targetLocation;
 
     }
 

@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -36,10 +37,7 @@ public class Hardware {
         rearLeft = hardwareMap.get(DcMotor.class, "rearLeft");
         rearRight = hardwareMap.get(DcMotor.class, "rearRight");
 
-        ejectionMotor = hardwareMap.get(DcMotor.class, "ejectionMotor");
-        intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
-        liftMotor = hardwareMap.get(DcMotor.class, "liftMotor");
-        beltMotor = hardwareMap.get(DcMotor.class, "beltMotor");
+        rearRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
         largeClawArmServo = hardwareMap.get(Servo.class,"largeClawArmServo");
         flagServo = hardwareMap.get(Servo.class,"flagServo");

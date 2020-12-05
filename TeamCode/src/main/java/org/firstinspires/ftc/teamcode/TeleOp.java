@@ -58,12 +58,16 @@ public class TeleOp extends OpMode
 
     Hardware hardware;
 
+    double frontLeftPower;
+    double frontRightPower;
+    double rearLeftPower;
+    double rearRightPower;
+
     /*
      * Code to run ONCE when the driver hits INIT
      */
     @Override
-    public void init() {
-        telemetry.addData("Status", "Initialized");
+    public void init(){
 
         hardware = new Hardware(hardwareMap);
 
@@ -91,11 +95,6 @@ public class TeleOp extends OpMode
      */
     @Override
     public void loop() {
-
-        double frontLeftPower;
-        double frontRightPower;
-        double rearLeftPower;
-        double rearRightPower;
 
         frontLeftPower = gamepad1.left_stick_y + gamepad1.left_stick_x + gamepad1.right_stick_x;
         frontRightPower = gamepad1.left_stick_y - gamepad1.left_stick_x - gamepad1.right_stick_x;
@@ -140,7 +139,7 @@ public class TeleOp extends OpMode
         {
             hardware.largeClawArmServo.setPosition(0);
         }
-        if(gamepad2.left_bumper)
+        /* if(gamepad2.left_bumper)
         {
           hardware.beltMotor.setPower(1);
         }
@@ -163,9 +162,8 @@ public class TeleOp extends OpMode
         if(gamepad2.a)
         {
             hardware.ejectionMotor.setPower(0);
-        }
-        hardware.smallClawServo.setPosition(gamepad2.left_stick_y);
-        hardware.liftMotor.setPower(gamepad2.right_stick_y);
+        } */
+        hardware.smallClawServo.setPosition(gamepad2.left_stick_x);
         hardware.frontLeft.setPower(frontLeftPower);
         hardware.frontRight.setPower(frontRightPower);
         hardware.rearLeft.setPower(rearLeftPower);
