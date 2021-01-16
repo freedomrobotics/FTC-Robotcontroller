@@ -58,7 +58,7 @@ public class Autonomous extends OpMode
     Hardware hardware;
 
     //set initial robot location here in inches(center of field is origin)
-    float[] robotLocation = {-40, -50};
+    float[] robotLocation = {-48, -48};
 
     float[] frontLeftLocation;
     float[] frontRightLocation;
@@ -86,6 +86,14 @@ public class Autonomous extends OpMode
     @Override
     public void start() {
 
+        moveTo(-54, -40);
+        moveTo(-54, 0);
+
+        // lower wobble goal
+        //hardware.largeClawArmServo.setPosition(//put something here);
+
+        moveTo(-36, 0);
+
     }
 
     /*
@@ -105,10 +113,10 @@ public class Autonomous extends OpMode
     public void stop() {
     }
 
-    private void moveTo(float[] targetLocation){
+    private void moveTo(int targetLocationX, int targetLocationY){
 
-        float xDirMovement = targetLocation[0] - robotLocation[0];
-        float yDirMovement = targetLocation[1] - robotLocation[1];
+        float xDirMovement = targetLocationX - robotLocation[0];
+        float yDirMovement = targetLocationY - robotLocation[1];
 
         // Turn On RUN_TO_POSITION
         hardware.frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -173,7 +181,6 @@ public class Autonomous extends OpMode
         hardware.rearRight.setPower(0);
 
         // move left/right
-        // move forward/backward
         hardware.frontLeft.setTargetPosition((int) yDirMovement);
         hardware.frontRight.setTargetPosition((int) yDirMovement);
         hardware.rearLeft.setTargetPosition((int) yDirMovement);
@@ -202,7 +209,8 @@ public class Autonomous extends OpMode
         hardware.rearLeft.setPower(0);
         hardware.rearRight.setPower(0);
 
-        robotLocation = targetLocation;
+        robotLocation[0] = targetLocationX;
+        robotLocation[1] = targetLocationY;
 
     }
 
