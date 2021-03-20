@@ -139,7 +139,7 @@ public class TeleOp extends OpMode
         {
             hardware.largeClawArmServo.setPosition(0);
         }
-        /* if(gamepad2.left_bumper)
+        if(gamepad2.left_bumper)
         {
           hardware.beltMotor.setPower(1);
         }
@@ -162,7 +162,7 @@ public class TeleOp extends OpMode
         if(gamepad2.a)
         {
             hardware.ejectionMotor.setPower(0);
-        } */
+        }
         hardware.smallClawServo.setPosition(gamepad2.left_stick_x);
         hardware.frontLeft.setPower(frontLeftPower);
         hardware.frontRight.setPower(frontRightPower);

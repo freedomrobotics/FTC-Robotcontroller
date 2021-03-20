@@ -39,6 +39,11 @@ public class Hardware {
 
         rearRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
+        ejectionMotor = hardwareMap.get(DcMotor.class, "ejectionMotor");
+        intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
+        liftMotor = hardwareMap.get(DcMotor.class, "liftMotor");
+        beltMotor = hardwareMap.get(DcMotor.class, "beltMotor");
+
         largeClawArmServo = hardwareMap.get(Servo.class,"largeClawArmServo");
         flagServo = hardwareMap.get(Servo.class,"flagServo");
         smallClawArmServo = hardwareMap.get(Servo.class,"smallClawArmServo");
