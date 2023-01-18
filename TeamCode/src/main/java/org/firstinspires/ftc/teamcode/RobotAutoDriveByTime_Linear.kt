@@ -52,6 +52,7 @@ import org.firstinspires.ftc.teamcode.RobotAutoDriveByTime_Linear
  * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
+
 @Autonomous(name = "Robot: Auto Drive By Time", group = "Robot")
 class RobotAutoDriveByTime_Linear : LinearOpMode() {
     private var front_left: DcMotor? = null
@@ -60,39 +61,11 @@ class RobotAutoDriveByTime_Linear : LinearOpMode() {
     private var back_right: DcMotor? = null
     private val runtime = ElapsedTime()
 
-    private fun drive(direction: String) {
-        when (direction) {
-            "forward" -> {
-                front_left!!.power = 0.5
-                front_right!!.power = 0.5
-                back_left!!.power = 0.5
-                back_right!!.power = 0.5
-            }
-            "backward" -> {
-                front_left!!.power = -0.5
-                front_right!!.power = -0.5
-                back_left!!.power = -0.5
-                back_right!!.power = -0.5
-            }
-            "left" -> {
-                front_left!!.power = -0.5
-                front_right!!.power = 0.5
-                back_left!!.power = 0.5
-                back_right!!.power = -0.5
-            }
-            "right" -> {
-                front_left!!.power = 0.5
-                front_right!!.power = -0.5
-                back_left!!.power = 0.5
-                back_right!!.power = -0.5
-            }
-            "stop" -> {
-                front_left!!.power = 0.0
-                front_right!!.power = 0.0
-                back_left!!.power = 0.0
-                back_right!!.power = 0.0
-            }
-        }
+    private fun drive(Pivot: Double, Vertical: Double, Horizontal: Double) {
+        front_left!!.power = Pivot + Vertical + Horizontal
+        front_right!!.power = -Pivot + (Vertical + Horizontal)
+        back_left!!.power = Pivot + (Vertical - Horizontal)
+        back_right!!.power = -(-Pivot + Vertical + Horizontal)
     }
 
     override fun runOpMode() {
@@ -116,7 +89,7 @@ class RobotAutoDriveByTime_Linear : LinearOpMode() {
         // Step through each leg of the path, ensuring that the Auto mode has not been stopped along the way
 
         // Step 1:  Drive forward for 3 seconds
-        drive("forward")
+        drive(0.0, 0.5, 0.0)
 //        front_left!!.power = 0.5
 //        front_right!!.power = 0.5
 //        back_left!!.power = 0.5
@@ -128,7 +101,7 @@ class RobotAutoDriveByTime_Linear : LinearOpMode() {
         }
 
         // Step 2:  Spin right for 1.3 seconds
-        drive("right")
+        drive(0.5, 0.0, 0.0)
 //        front_left!!.power = 0.5
 //        front_right!!.power = -0.5
 //        back_left!!.power = 0.5
@@ -140,7 +113,7 @@ class RobotAutoDriveByTime_Linear : LinearOpMode() {
         }
 
         // Step 3:  Drive Forward for 1 Second
-        drive("forward")
+        drive(0.0, 0.5, 0.0)
 //        front_left!!.power = 0.5
 //        front_right!!.power = 0.5
 //        back_left!!.power = 0.5
