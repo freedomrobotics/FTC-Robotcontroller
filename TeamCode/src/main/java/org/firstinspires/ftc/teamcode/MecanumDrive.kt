@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.DcMotor
+import com.qualcomm.robotcore.hardware.ServoController
 import kotlin.math.abs
 
 /**
@@ -11,7 +12,7 @@ import kotlin.math.abs
  *
  * @author Brandon Gong
  */
-@TeleOp(name = "Mecanum Drive Example", group = "Iterative Opmode")
+@TeleOp(name = "Mecanum Drive", group = "Iterative Opmode")
 class MecanumDrive : OpMode() {
     /*
      * The mecanum drivetrain involves four separate motors that spin in
@@ -23,6 +24,9 @@ class MecanumDrive : OpMode() {
     private var front_right: DcMotor? = null
     private var back_left: DcMotor? = null
     private var back_right: DcMotor? = null
+//    private var raise_right: DcMotor? = null
+//    private var raise_left: DcMotor? = null
+//    private var jaw: ServoController? = null
     var front_left_mod = 1.0
     var front_right_mod = 1.0
     var back_left_mod = 1.0
@@ -37,6 +41,9 @@ class MecanumDrive : OpMode() {
         front_right = hardwareMap.get(DcMotor::class.java, "motorFrontRight")
         back_left = hardwareMap.get(DcMotor::class.java, "motorBackLeft")
         back_right = hardwareMap.get(DcMotor::class.java, "motorBackRight")
+//        raise_right = hardwareMap.get(DcMotor::class.java, "motorRaiseRight")
+//        raise_left = hardwareMap.get(DcMotor::class.java, "motorRaiseLeft")
+//        jaw = hardwareMap.get(ServoController::class.java, "motorJawActuation")
     }
 
     override fun loop() {
@@ -45,10 +52,13 @@ class MecanumDrive : OpMode() {
         val drive = gamepad1.left_stick_y.toDouble()
         val strafe = gamepad1.left_stick_x.toDouble()
         val twist = gamepad1.right_stick_x.toDouble()
+        val grabber_up = gamepad1.right_trigger.toDouble()
+        val grabber_down = gamepad1.left_trigger.toDouble()
         val change_left = gamepad1.dpad_left
         val change_right = gamepad1.dpad_right
         val change_pos = gamepad1.dpad_up
         val change_neg = gamepad1.dpad_down
+
 
         if (change_left) {
             if (active == 0) {
@@ -116,9 +126,9 @@ class MecanumDrive : OpMode() {
         // the motor.  This is not an issue with the calculations themselves.
         val speeds = doubleArrayOf(
             (drive + strafe + twist) * front_left_mod,
-            drive - strafe - twist * front_right_mod,
+            (drive - strafe - twist * -1) * front_right_mod,
             (drive - strafe + twist * -1) * back_left_mod,
-            (drive + strafe - twist * -1) * back_right_mod
+            (drive + strafe - twist) * back_right_mod
         )
 
         // Because we are adding vectors and motors only take values between
@@ -126,16 +136,31 @@ class MecanumDrive : OpMode() {
 
         // Loop through all values in the speeds[] array and find the greatest
         // *magnitude*.  Not the greatest velocity.
-        var max = abs(speeds[0])
-        for (i in speeds.indices) {
-            if (max < abs(speeds[i])) max = abs(speeds[i])
-        }
+//        var max = abs(speeds[0])
+//        for (i in speeds.indices) {
+//            if (max < abs(speeds[i])) max = abs(speeds[i])
+//        }
+//
+//        // If and only if the maximum is outside of the range we want it to be,
+//        // normalize all the other speeds based on the given speed value.
+//        if (max > 1) {
+//            for (i in speeds.indices) speeds[i] /= max
+//        }
 
-        // If and only if the maximum is outside of the range we want it to be,
-        // normalize all the other speeds based on the given speed value.
-        if (max > 1) {
-            for (i in speeds.indices) speeds[i] /= max
-        }
+
+
+        val grabber = grabber_up + grabber_down
+//
+//        raise_left?.power = grabber
+//        raise_right?.power = grabber
+//
+//        while (gamepad1.a) {
+//            jaw?.setServoPosition(0, 0.0)
+//        }
+//
+//        while (gamepad1.b) {
+//            jaw?.setServoPosition(0, 1.0)
+//        }
 
         // apply the calculated values to the motors.
         front_left!!.power = speeds[0]
